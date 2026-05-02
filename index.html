@@ -4,11 +4,11 @@
   <title>ShopFinder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- FAVICON -->
+  <!-- Favicon -->
   <link rel="icon" href="https://i.ibb.co/8ggt05j7/file-000000002ddc7207ac954089ca8441d9.png">
 
-  <!-- PWA META -->
-  <meta name="theme-color" content="#1e293b">
+  <!-- PWA -->
+  <meta name="theme-color" content="#020617">
   <link rel="manifest" href="manifest.json">
 
   <style>
@@ -64,58 +64,135 @@
       opacity: 0.7;
     }
 
-    /* 🔥 SPLASH ANIMATION */
+    /* 🔥 SPLASH SCREEN */
     #splash {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #0f172a;
+      background: radial-gradient(circle at center, #020617, #020617 60%, #000);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      color: white;
       z-index: 9999;
     }
 
-    .walk {
-      font-size: 50px;
-      animation: walkAnim 2s linear forwards;
+    .scene {
+      position: relative;
+      width: 260px;
+      height: 120px;
+      margin-bottom: 20px;
+    }
+
+    .line {
+      position: absolute;
+      top: 55px;
+      left: 20px;
+      width: 200px;
+      height: 2px;
+      border-top: 2px dashed #22c55e;
+      opacity: 0.5;
+    }
+
+    .dot {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #22c55e;
+      animation: moveDot 2.2s ease forwards;
+    }
+
+    .map {
+      position: absolute;
+      right: 0;
+      top: 20px;
+      width: 50px;
+      height: 40px;
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border-radius: 8px;
+      box-shadow: 0 0 10px #000;
+      opacity: 0;
+      animation: showMap 0.5s ease forwards;
+      animation-delay: 1.5s;
     }
 
     .pin {
-      font-size: 40px;
-      margin-top: 20px;
-      opacity: 0;
-      animation: showPin 1s ease forwards;
-      animation-delay: 2s;
+      position: absolute;
+      top: 8px;
+      left: 18px;
+      width: 14px;
+      height: 14px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #22c55e;
     }
 
-    .loading {
-      margin-top: 10px;
-      font-size: 14px;
-      opacity: 0.7;
+    .title {
+      font-size: 22px;
+      margin: 5px;
     }
 
-    @keyframes walkAnim {
-      0% { transform: translateX(-100px); }
-      100% { transform: translateX(0); }
+    .sub {
+      font-size: 13px;
+      opacity: 0.6;
     }
 
-    @keyframes showPin {
-      to { opacity: 1; transform: translateY(10px); }
+    .progress {
+      margin-top: 15px;
+      width: 120px;
+      height: 4px;
+      background: #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bar {
+      width: 0%;
+      height: 100%;
+      background: #22c55e;
+      animation: load 2.5s linear forwards;
+    }
+
+    @keyframes moveDot {
+      0% { left: 0; }
+      100% { left: 180px; }
+    }
+
+    @keyframes showMap {
+      to { opacity: 1; transform: scale(1.05); }
+    }
+
+    @keyframes load {
+      to { width: 100%; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- 🔥 SPLASH SCREEN -->
+<!-- 🔥 SPLASH -->
 <div id="splash">
-  <div class="walk">🚶</div>
-  <div class="pin">📍</div>
-  <p class="loading">ShopFinder Loading...</p>
+  <div class="scene">
+    <div class="line"></div>
+    <div class="dot"></div>
+    <div class="map">
+      <div class="pin"></div>
+    </div>
+  </div>
+
+  <h2 class="title">ShopFinder</h2>
+  <p class="sub">Find any shop near you</p>
+
+  <div class="progress">
+    <div class="bar"></div>
+  </div>
 </div>
 
 <div id="app"></div>
@@ -135,7 +212,6 @@
           <p class="small">Find any shop near you</p>
 
           <input id="addr" placeholder="Enter your address">
-
           <button onclick="goHome()">Continue</button>
         </div>
       `;
@@ -151,7 +227,6 @@
           <input id="search" placeholder="Search (medical, grocery, salon...)">
 
           <button class="searchBtn" onclick="search()">Search Nearby 🔍</button>
-
           <button class="logout" onclick="logout()">Logout</button>
         </div>
       `;
@@ -180,16 +255,19 @@
 
   render();
 
-  // 🔥 SPLASH HIDE
+  // Splash hide
   setTimeout(() => {
-    document.getElementById("splash").style.display = "none";
-  }, 3500);
+    const splash = document.getElementById("splash");
+    splash.style.transition = "opacity 0.5s";
+    splash.style.opacity = "0";
+    setTimeout(() => splash.style.display = "none", 500);
+  }, 3000);
 
-  // SERVICE WORKER
+  // Service worker
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("service-worker.js");
   }
 </script>
 
 </body>
-</html>
+  </html>
