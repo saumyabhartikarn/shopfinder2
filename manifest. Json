@@ -1,0 +1,20 @@
+{
+  "name": "ShopFinder",
+  "short_name": "ShopFinder",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1e293b",
+  "theme_color": "#1e293b",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/8ggt05j7/file-000000002ddc7207ac954089ca8441d9.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.ibb.co/8ggt05j7/file-000000002ddc7207ac954089ca8441d9.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
