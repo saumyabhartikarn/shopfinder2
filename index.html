@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ShopFinder</title>
+  <title>ShopFinder | By Saumyabhartikarn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Favicon -->
@@ -64,7 +64,7 @@
       opacity: 0.7;
     }
 
-    /* 🔥 SPLASH SCREEN */
+    /* SPLASH CSS SAME */
     #splash {
       position: fixed;
       top: 0;
@@ -177,7 +177,7 @@
 
 <body>
 
-<!-- 🔥 SPLASH -->
+<!-- SPLASH SAME -->
 <div id="splash">
   <div class="scene">
     <div class="line"></div>
@@ -211,8 +211,10 @@
           <h2>ShopFinder</h2>
           <p class="small">Find any shop near you</p>
 
-          <input id="addr" placeholder="Enter your address">
+          <input id="addr" placeholder="Enter your name">
           <button onclick="goHome()">Continue</button>
+
+          <p class="small">✨ Made by Saumyabhartikarn</p>
         </div>
       `;
     }
@@ -222,12 +224,14 @@
         <div class="card">
           <img src="https://i.ibb.co/8ggt05j7/file-000000002ddc7207ac954089ca8441d9.png" class="logo">
           <h3>Hi 👋</h3>
-          <p class="small">${address}</p>
+          <p class="small">${name}</p>
 
-          <input id="search" placeholder="Search (medical, grocery, salon...)">
+          <input id="search" placeholder="Search (medical, grocery, salon, school...)">
 
           <button class="searchBtn" onclick="search()">Search Nearby 🔍</button>
           <button class="logout" onclick="logout()">Logout</button>
+
+          <p class="small">✨ Made by Saumyabhartikarn</p>
         </div>
       `;
     }
@@ -255,7 +259,6 @@
 
   render();
 
-  // Splash hide
   setTimeout(() => {
     const splash = document.getElementById("splash");
     splash.style.transition = "opacity 0.5s";
@@ -263,11 +266,10 @@
     setTimeout(() => splash.style.display = "none", 500);
   }, 3000);
 
-  // Service worker
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("service-worker.js");
   }
 </script>
 
 </body>
-  </html>
+</html>
